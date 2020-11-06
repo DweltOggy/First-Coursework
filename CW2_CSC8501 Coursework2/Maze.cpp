@@ -35,22 +35,15 @@ void Maze::delete_maze()
 {
 	if (the_maze)
 	{
-		//grid->clear();
-		//delete grid;
-		//grid = nullptr;
-
 		the_maze->clear();
 		delete the_maze;
 		the_maze = nullptr;
-
 		traversable_cells.clear();
-		
 	}
 }
 
 void Maze::initilise(int height, int length, int exits)
 {
-
 	if (the_maze)
 	{
 		delete_maze();
@@ -74,8 +67,6 @@ void Maze::initilise(int height, int length, int exits)
 			(*the_maze)[i][j].pos.x = j;
 			(*the_maze)[i][j].value = 'X';
 		}
-	
-
 }
 
 void Maze::link_nodes()
@@ -85,7 +76,6 @@ void Maze::link_nodes()
 	for (int i = 0; i < m_height; i++)
 		for (int j = 0; j < m_length; j++)
 		{
-
 			if ((*the_maze)[i][j].value == ' ' || (*the_maze)[i][j].value == 'E' || 
 				(*the_maze)[i][j].value == 'F')
 			{
@@ -94,7 +84,6 @@ void Maze::link_nodes()
 				counter++;
 				traversable_cells.push_back(&(*the_maze)[i][j]);
 			}
-		
 		}
 
 	for (int i = 0; i < m_height; i++)
@@ -117,12 +106,9 @@ void Maze::link_nodes()
 				
 				if (j < m_length - 1)
 					if ((*the_maze)[i][j + 1].traversable == true)
-						(*the_maze)[i][j].neighbors.push_back(&(*the_maze)[i][j + 1]);
-				
-			}
-			
+						(*the_maze)[i][j].neighbors.push_back(&(*the_maze)[i][j + 1]);	
+			}	
 		}
-
 }
 
 vector<coord> Maze::calculate_path(coord begin, coord target)
@@ -230,12 +216,12 @@ vector<coord> Maze::reconstruct_path(cell* current)
 Maze::cell* Maze::lowest_F()
 {
 	cell* lowestF = traversable_cells[0];
-	float currentLowest = 10000000;//traversable_cells[0]->f_score;
+	float currentLowest = 10000000;
 
 	auto it = traversable_cells.begin();
 	while (it != traversable_cells.end())
 	{
-		if ((*it)->f_score < currentLowest /*&& (*it)->f_score > 0*/ && (*it)->openset == true)
+		if ((*it)->f_score < currentLowest && (*it)->openset == true)
 		{
 			currentLowest = (*it)->f_score;
 			lowestF = traversable_cells[(*it)->indexNumber];
@@ -281,8 +267,6 @@ void Maze::generate_maze(int height, int length, int exits)
 				(*the_maze)[i][j].value = ' ';
 		}
 	
-
-
 	for (int i = m_center.y; i < m_height - 1; i++)
 	{
 		(*the_maze)[i][m_center.x].value = ' ';
@@ -460,4 +444,9 @@ void Maze::read_maze(string file_name)
 	}
 	else
 		cout << "couldn't open file: " << file_name << ".txt" << endl;
+}
+
+void Maze::set_maze_coord(coord position, char value)
+{
+	(*the_maze)[position.y][position.x].value = value;
 }

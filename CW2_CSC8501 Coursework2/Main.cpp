@@ -12,6 +12,43 @@ int main()
 
 	Maze_Manager the_game;
 
+	the_game.initilise(20, 50, 2);
+	the_game.generate_player_paths();
+
+	while (the_game.all_players_done() == false)
+	{
+		the_game.take_turn();
+
+		//the_game->print_maze();
+		char save_maze = 'n';
+
+		cout << " Save Turn? Y/N" << endl;
+		cin >> save_maze;
+		string file_name;
+		switch (save_maze)
+		{
+		case 'N':
+			
+			break;
+		case 'n':
+			
+			break;
+		case 'Y':
+			
+			cout << "Please enter a file name (without .txt)" << endl;
+			cin >> file_name;
+			the_game.save_current_turn(file_name);
+			break;
+		case 'y':
+			cout << "Please enter a file name (without .txt)" << endl;
+			cin >> file_name;
+			the_game.save_current_turn(file_name);
+			break;
+		default:
+			
+			break;
+		}
+	}
 
 	while (game)
 	{

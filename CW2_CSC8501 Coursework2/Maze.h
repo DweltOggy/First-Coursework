@@ -15,6 +15,13 @@ struct coord
 		return (x == other.x && y == other.y);
 	}
 
+	coord operator = (const coord& other)
+	{
+		x = other.x;
+		y = other.y;
+		return *this;
+	}
+
 	coord operator -(const coord& other)
 	{
 		x = x - other.x;
@@ -55,12 +62,12 @@ private:
 	int m_length;
 	int m_entrances;
 
-	coord m_center;
+	
 
 	vector<vector<cell>> *the_maze;
 	vector<cell*> traversable_cells;
 
-	vector<coord> entrances_coords;
+	
 	
 	void initilise(int height, int length, int exits);
 	void link_nodes();
@@ -78,12 +85,17 @@ private:
 	
 public:
 
+	vector<coord> entrances_coords;
+	coord m_center;
+
 	Maze();
 	~Maze();
 
 	void generate_maze(int height, int length, int exits);
 	void solve_maze(coord start);
 	void print_maze();
+
+	void set_maze_coord(coord position, char value);
 	
 	vector<coord> calculate_path(coord begin, coord target);
 

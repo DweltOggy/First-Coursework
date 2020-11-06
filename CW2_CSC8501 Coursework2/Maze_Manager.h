@@ -3,15 +3,16 @@
 
 struct Player
 {
-	coord position;
+	coord position;// = coord{ 0,0 };
 	vector<coord> path;
+	bool finished = false;
 };
 
 class Maze_Manager
 {
 private:
-	//Maze* game_maze = nullptr;
-	vector <Maze*> mazes;
+	Maze* game_maze;
+	//vector <Maze*> mazes;
 
 	vector<Player> the_players;
 
@@ -21,14 +22,16 @@ public:
 	Maze_Manager();
 	~Maze_Manager();
 
-	void initilise(int height, int length, int exits, int num_mazes);
+	void initilise(int height, int length, int exits);
 	
 	void generate_player_paths();
 	void analyze_paths();
 
+	bool all_players_done();
 
 	void take_turn();
-	void save_current_turn();
+
+	void save_current_turn(string file_name);
 
 
 
