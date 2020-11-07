@@ -41,7 +41,6 @@ int main()
 			cout << "selected a valid option!" << endl;
 			break;
 		}
-
 	}
 
 	return 0;

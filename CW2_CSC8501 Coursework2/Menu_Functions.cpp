@@ -57,7 +57,10 @@ void run_maze(Maze_Manager* the_game)
 		the_game->take_turn();
 
 		is_done = the_game->all_players_done();
-		//is_done = the_game->in_deadlock();
+
+		if (the_game->in_deadlock())
+			cout << "Maze is in deadlock! You should quit!" << endl;
+		
 
 		char save_maze = 'n';
 
