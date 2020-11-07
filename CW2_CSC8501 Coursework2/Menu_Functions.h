@@ -1,4 +1,7 @@
 #pragma once
+#include "Menu_Functions.h"
+#include "Maze.h"
+#include "Maze_Manager.h"
 
 void run_one_maze();
 

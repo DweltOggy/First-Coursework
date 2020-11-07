@@ -6,10 +6,6 @@
 
 void run_one_maze()
 {
-	//srand(time(NULL));
-	
-
-	//Maze_Manager the_game;
 	Maze_Manager* the_game = new Maze_Manager;
 	int maze_lenght = 0;
 	int maze_height = 0;
@@ -41,8 +37,15 @@ void run_one_maze()
 
 void run_from_loaded()
 {
+	Maze_Manager* the_game = new Maze_Manager;
+	string file_name;
+	cout << " please enter the name of the file you wish to load (without .txt)" << endl;
+	cin >> file_name;
 
+	the_game->read_maze(file_name);
 
+	if(the_game->the_maze != nullptr)
+		run_maze(the_game);
 }
 
 void run_maze(Maze_Manager* the_game)
