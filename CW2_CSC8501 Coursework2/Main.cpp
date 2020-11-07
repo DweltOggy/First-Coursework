@@ -8,17 +8,19 @@ using namespace std;
 int main()
 {
 	srand(time(NULL));
-	bool game = false;
+	bool is_done = false;
 
 	Maze_Manager the_game;
 
-	the_game.initilise(20, 50, 2);
+	//the_game.initilise(20, 50, 5);
+	the_game.read_maze("testcontinue");
 	the_game.generate_player_paths();
 
-	while (the_game.all_players_done() == false)
+	while (is_done == false)
 	{
 		the_game.take_turn();
 
+		is_done = the_game.all_players_done();
 		//the_game->print_maze();
 		char save_maze = 'n';
 
@@ -27,31 +29,42 @@ int main()
 		string file_name;
 		switch (save_maze)
 		{
-		case 'N':
-			
-			break;
-		case 'n':
-			
-			break;
 		case 'Y':
-			
 			cout << "Please enter a file name (without .txt)" << endl;
 			cin >> file_name;
-			the_game.save_current_turn(file_name);
+			the_game.save_maze(file_name);
 			break;
 		case 'y':
 			cout << "Please enter a file name (without .txt)" << endl;
 			cin >> file_name;
-			the_game.save_current_turn(file_name);
+			the_game.save_maze(file_name);
 			break;
 		default:
 			
 			break;
 		}
+
+		char quit = 'n';
+
+		cout << " Quit? Y/N" << endl;
+		cin >> quit;
+		
+		switch (quit)
+		{
+		case 'Y':
+			is_done = true;
+			break;
+		case 'y':
+			is_done = true;
+			break;
+		default:
+
+			break;
+		}
 	}
 
-	while (game)
-	{
+	//while (game)
+	//{
 	/*	Maze* game_maze = new Maze;
 
 		int maze_lenght = 0;
@@ -165,7 +178,7 @@ int main()
 		//	break;
 		//}
 		//delete game_maze;
-	}
+	//}
 	
 	return 0;
 }

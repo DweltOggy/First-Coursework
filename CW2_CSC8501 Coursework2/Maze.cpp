@@ -67,6 +67,8 @@ void Maze::initilise(int height, int length, int exits)
 			(*the_maze)[i][j].pos.x = j;
 			(*the_maze)[i][j].value = 'X';
 		}
+
+	generate_maze(height, length, exits);
 }
 
 void Maze::link_nodes()
@@ -77,7 +79,7 @@ void Maze::link_nodes()
 		for (int j = 0; j < m_length; j++)
 		{
 			if ((*the_maze)[i][j].value == ' ' || (*the_maze)[i][j].value == 'E' || 
-				(*the_maze)[i][j].value == 'F')
+				(*the_maze)[i][j].value == 'F' || (*the_maze)[i][j].value == 'P')
 			{
 				(*the_maze)[i][j].indexNumber = counter;
 				(*the_maze)[i][j].traversable = true;
@@ -213,7 +215,7 @@ vector<coord> Maze::reconstruct_path(cell* current)
 	return returnPath;
 }
 
-Maze::cell* Maze::lowest_F()
+cell* Maze::lowest_F()
 {
 	cell* lowestF = traversable_cells[0];
 	float currentLowest = 10000000;
@@ -245,7 +247,7 @@ void Maze::solve_maze(coord start)
 
 void Maze::generate_maze(int height, int length, int exits)
 {
-	initilise(height, length, exits);
+	//initilise(height, length, exits);
 	place_exits();
 
 	for (int i = 1; i < m_height - 1; i++)
@@ -255,7 +257,6 @@ void Maze::generate_maze(int height, int length, int exits)
 			if (random < 7)
 				(*the_maze)[i][j].value = ' ';
 		}
-	
 
 	for (int i = 1; i < m_height - 1 ; i++)
 		for (int j = 1; j < m_length-1; j++)
@@ -282,9 +283,6 @@ void Maze::generate_maze(int height, int length, int exits)
 			(*the_maze)[i][j].value = ' ';
 
 	link_nodes();
-
-
-	//solve_maze(m_center);
 
 	(*the_maze)[m_center.y][m_center.x].value = 'F';
 
@@ -358,13 +356,13 @@ void Maze::print_maze()
 				}
 				else if ((*the_maze)[i][j].value == 'o')
 				{
-					SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), 14);
+					SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), 6);
 					cout << (*the_maze)[i][j].value;
 					SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), 7);
 				}
 				else if ((*the_maze)[i][j].value == 'P')
 				{
-					SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), 16);
+					SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), 11);
 					cout << (*the_maze)[i][j].value;
 					SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), 7);
 				}
@@ -434,6 +432,14 @@ void Maze::read_maze(string file_name)
 
 					entrances_coords.push_back(temp_exit);
 				}
+				if (temp.value == 'F')
+				{
+					coord temp_center;
+					temp_center.y = m_height;
+					temp_center.x = i;
+					m_center = temp_center;
+					//entrances_coords.push_back(temp_exit);
+				}
 			}
 				
 			
@@ -450,3 +456,6 @@ void Maze::set_maze_coord(coord position, char value)
 {
 	(*the_maze)[position.y][position.x].value = value;
 }
+
+
+	
