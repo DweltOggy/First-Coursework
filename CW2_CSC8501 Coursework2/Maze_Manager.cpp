@@ -119,7 +119,7 @@ void Maze_Manager::read_maze(string file_name)
 		while (getline(myfile, line))
 		{
 			m_length = line.length();
-			m_height++;
+			
 			vector<cell> temp_row;
 			for (auto i = 0; i < line.length(); i++)
 			{
@@ -157,6 +157,7 @@ void Maze_Manager::read_maze(string file_name)
 
 
 			(*the_maze).push_back(temp_row);
+			m_height++;
 		}
 		myfile.close();
 		link_nodes();

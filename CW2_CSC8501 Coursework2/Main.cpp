@@ -12,8 +12,8 @@ int main()
 
 	Maze_Manager the_game;
 
-	//the_game.initilise(20, 50, 5);
-	the_game.read_maze("testcontinue");
+	the_game.initilise(20, 50, 5);
+	//the_game.read_maze("turnTest1");
 	the_game.generate_player_paths();
 
 	while (is_done == false)

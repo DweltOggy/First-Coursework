@@ -79,7 +79,8 @@ void Maze::link_nodes()
 		for (int j = 0; j < m_length; j++)
 		{
 			if ((*the_maze)[i][j].value == ' ' || (*the_maze)[i][j].value == 'E' || 
-				(*the_maze)[i][j].value == 'F' || (*the_maze)[i][j].value == 'P')
+				(*the_maze)[i][j].value == 'F' || (*the_maze)[i][j].value == 'P' || 
+				(*the_maze)[i][j].value == 'o')
 			{
 				(*the_maze)[i][j].indexNumber = counter;
 				(*the_maze)[i][j].traversable = true;
