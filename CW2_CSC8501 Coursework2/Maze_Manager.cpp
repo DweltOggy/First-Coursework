@@ -51,9 +51,21 @@ bool Maze_Manager::all_players_done()
 	for (int i = 0; i < the_players.size(); i++)
 		if (the_players[i].finished == false)
 			answer = false;
-		
+
 	return answer;
 }
+
+bool Maze_Manager::in_deadlock()
+{
+	bool answer = true;
+
+	for (int i = 0; i < the_players.size(); i++)
+		if (the_players[i].deadlocked == false)
+			answer = false;
+
+	return answer;
+}
+
 
 void Maze_Manager::take_turn()
 {

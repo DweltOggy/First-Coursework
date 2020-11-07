@@ -32,6 +32,8 @@ public:
 
 	bool all_players_done();
 
+	bool in_deadlock();
+
 	void take_turn();
 
 	bool check_move(int index);

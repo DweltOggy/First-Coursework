@@ -305,29 +305,33 @@ void Maze::place_exits()
 		{
 			exit.y = 0;
 			exit.x = rand() % m_length;
-			while(exit.x == 0 || exit.x == m_length)
+			while(exit.x == 0 || exit.x == m_length || (*the_maze)[exit.y][exit.x].value == 'E')
 				exit.x = rand() % m_length;
+
 		}
 		else if(check1 && !check2)
 		{
 			exit.y = m_height - 1;
 			exit.x = rand() % m_length;
-			while (exit.x == 0 || exit.x == m_length)
+			while (exit.x == 0 || exit.x == m_length || (*the_maze)[exit.y][exit.x].value == 'E')
 				exit.x = rand() % m_length;
+
 		}
 		else if (!check1 && check2)
 		{
 			exit.x = 0;
 			exit.y = rand() % m_height;
-			while (exit.y == 0 || exit.y == m_height)
+			while (exit.y == 0 || exit.y == m_height ||(*the_maze)[exit.y][exit.x].value == 'E')
 				exit.y = rand() % m_height;
+
 		}
 		else if (!check1 && !check2)
 		{
 			exit.x = m_length - 1;
 			exit.y = rand() % m_height;
-			while (exit.y == 0 || exit.y == m_height)
+			while (exit.y == 0 || exit.y == m_height || (*the_maze)[exit.y][exit.x].value == 'E')
 				exit.y = rand() % m_height;
+
 		}
 
 		entrances_coords.push_back(exit);
