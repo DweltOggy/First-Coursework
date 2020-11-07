@@ -99,7 +99,6 @@ void Maze_Manager::take_turn()
 			}
 		}
 	}
-	print_maze();
 }
 
 bool Maze_Manager::check_move(int index)
@@ -116,6 +115,9 @@ bool Maze_Manager::check_move(int index)
 				{
 					the_players[index].deadlocked = true;
 					the_players[i].deadlocked = true;
+
+					the_players[index].finished = true;
+					the_players[i].finished = true;
 					return false;
 				}			
 		}
@@ -186,4 +188,26 @@ void Maze_Manager::read_maze(string file_name)
 	}
 	else
 		cout << "couldn't open file: " << file_name << ".txt" << endl;
+}
+
+bool Maze_Manager::validate_maze()
+{
+	if (the_players.size() < m_entrances || the_players.size() > m_entrances || the_players.size() < 2)
+		return false;
+
+	return true;
+}
+
+bool  Maze_Manager::run_maze()
+{
+	while (all_players_done() == false)
+		take_turn();
+	
+
+	for (auto i = 0; i < the_players.size(); i++)
+		if (the_players[i].deadlocked == true)
+			return false;
+	
+
+	return true;
 }

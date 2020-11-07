@@ -27,18 +27,23 @@ int main()
 		{
 		case 1:
 			run_one_maze();
+			menu_choice = 0;
 			break;
 		case 2:
 			run_from_loaded();
+			menu_choice = 0;
 			break;
 		case 3:
 			run_maze_analysis();
+			menu_choice = 0;
 			break;
 		case 4:
 			maze_coninue = false;
+			menu_choice = 0;
 			break;
 		default:
 			cout << "selected a valid option!" << endl;
+			menu_choice = 0;
 			break;
 		}
 	}

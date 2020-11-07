@@ -305,7 +305,7 @@ void Maze::place_exits()
 		{
 			exit.y = 0;
 			exit.x = rand() % m_length;
-			while(exit.x == 0 || exit.x == m_length || (*the_maze)[exit.y][exit.x].value == 'E')
+			while(exit.x == 0 || exit.x == (m_length - 1) || (*the_maze)[exit.y][exit.x].value == 'E')
 				exit.x = rand() % m_length;
 
 		}
@@ -313,7 +313,7 @@ void Maze::place_exits()
 		{
 			exit.y = m_height - 1;
 			exit.x = rand() % m_length;
-			while (exit.x == 0 || exit.x == m_length || (*the_maze)[exit.y][exit.x].value == 'E')
+			while (exit.x == 0 || exit.x == (m_length - 1) || (*the_maze)[exit.y][exit.x].value == 'E')
 				exit.x = rand() % m_length;
 
 		}
@@ -321,7 +321,7 @@ void Maze::place_exits()
 		{
 			exit.x = 0;
 			exit.y = rand() % m_height;
-			while (exit.y == 0 || exit.y == m_height ||(*the_maze)[exit.y][exit.x].value == 'E')
+			while (exit.y == 0 || exit.y == (m_height - 1) ||(*the_maze)[exit.y][exit.x].value == 'E')
 				exit.y = rand() % m_height;
 
 		}
@@ -329,7 +329,7 @@ void Maze::place_exits()
 		{
 			exit.x = m_length - 1;
 			exit.y = rand() % m_height;
-			while (exit.y == 0 || exit.y == m_height || (*the_maze)[exit.y][exit.x].value == 'E')
+			while (exit.y == 0 || exit.y == (m_height - 1) || (*the_maze)[exit.y][exit.x].value == 'E')
 				exit.y = rand() % m_height;
 
 		}
@@ -461,6 +461,3 @@ void Maze::set_maze_coord(coord position, char value)
 {
 	(*the_maze)[position.y][position.x].value = value;
 }
-
-
-	

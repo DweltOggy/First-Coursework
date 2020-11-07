@@ -42,7 +42,9 @@ public:
 
 	void read_maze(string file_name);
 
-	void validate_maze();
+	bool validate_maze();
+
+	bool run_maze();
 
 };
 
