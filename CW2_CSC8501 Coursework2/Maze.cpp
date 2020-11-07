@@ -50,6 +50,7 @@ void Maze::initilise(int height, int length, int exits)
 		m_height = 0;
 		m_length = 0;
 		m_entrances = 0;
+		entrances_coords.clear();
 	}
 	m_height = height;
 	m_length = length;
@@ -419,7 +420,7 @@ void Maze::read_maze(string file_name)
 		while (getline(myfile, line))
 		{
 			m_length = line.length();
-			m_height++;
+			
 			vector<cell> temp_row;
 			for (auto i = 0; i < line.length(); i++)
 			{
@@ -449,6 +450,7 @@ void Maze::read_maze(string file_name)
 				
 			
 			(*the_maze).push_back(temp_row);
+			m_height++;
 		}
 		myfile.close();
 		link_nodes();

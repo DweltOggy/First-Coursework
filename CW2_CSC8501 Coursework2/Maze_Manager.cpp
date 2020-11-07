@@ -18,6 +18,8 @@ void Maze_Manager::initilise(int height, int length, int exits)
 {
 	Maze::initilise(height, length, exits);
 
+	the_players.clear();
+
 	for (int i = 0; i < exits; i++)
 	{
 		Player temp;
@@ -41,7 +43,11 @@ void Maze_Manager::generate_player_paths()
 
 void Maze_Manager::analyze_paths()
 {
+	if (the_maze)
+	{
 
+
+	}
 }
 
 bool Maze_Manager::all_players_done()
@@ -158,7 +164,7 @@ void Maze_Manager::read_maze(string file_name)
 		while (getline(myfile, line))
 		{
 			m_length = line.length();
-			
+
 			vector<cell> temp_row;
 			for (auto i = 0; i < line.length(); i++)
 			{
@@ -227,7 +233,7 @@ bool  Maze_Manager::run_maze()
 				return false;
 
 	}
-	
+
 	
 
 	return true;
