@@ -8,11 +8,11 @@ Maze_Manager::Maze_Manager()
 {
 	m_num_mazes = 0;
 }
+
 Maze_Manager::~Maze_Manager()
 {
 	the_players.clear();
 }
-
 
 void Maze_Manager::initilise(int height, int length, int exits)
 {
@@ -37,7 +37,6 @@ void Maze_Manager::generate_player_paths()
 			the_players[i].position = the_players[i].path.back();	
 	}
 }
-
 
 void Maze_Manager::analyze_paths()
 {
@@ -65,7 +64,6 @@ bool Maze_Manager::in_deadlock()
 
 	return answer;
 }
-
 
 bool Maze_Manager::in_partial_deadlock()
 {

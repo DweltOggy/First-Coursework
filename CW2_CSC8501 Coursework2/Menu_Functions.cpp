@@ -6,16 +6,48 @@
 
 void run_one_maze()
 {
-	srand(time(NULL));
-	bool is_done = false;
+	//srand(time(NULL));
+	
 
 	//Maze_Manager the_game;
 	Maze_Manager* the_game = new Maze_Manager;
+	int maze_lenght = 0;
+	int maze_height = 0;
+	int exit_number = 0;
+	
+	while (maze_lenght < 20 || maze_lenght > 70)
+	{
+		cout << " please enter the lengtn of the maze between 20 and 70" << endl;
+		cin >> maze_lenght;
+	}
+	while (maze_height < 20 || maze_height > 70)
+	{
+		cout << " please enter the height of the maze between 20 and 70" << endl;
+		cin >> maze_height;
+	}
+	while (exit_number < 1 || exit_number > 10)
+	{
+		cout << " please enter the number of player for the maze between 1 and 10" << endl;
+		cin >> exit_number;
+	}
 
-	the_game->initilise(20, 50, 5);
-	//the_game.read_maze("turnTest1");
+	the_game->initilise(maze_height, maze_lenght, exit_number);
 	the_game->generate_player_paths();
 
+	run_maze(the_game);
+
+	delete the_game;
+}
+
+void run_from_loaded()
+{
+
+
+}
+
+void run_maze(Maze_Manager* the_game)
+{
+	bool is_done = false;
 	while (is_done == false)
 	{
 
@@ -48,7 +80,7 @@ void run_one_maze()
 
 		char quit = 'n';
 
-		cout << " Quit? Y/N" << endl;
+		cout << " Quit current maze? Y/N" << endl;
 		cin >> quit;
 
 		switch (quit)
@@ -63,11 +95,7 @@ void run_one_maze()
 
 			break;
 		}
-
-
 	}
-
-	delete the_game;
 }
 
 void run_maze_analysis()
