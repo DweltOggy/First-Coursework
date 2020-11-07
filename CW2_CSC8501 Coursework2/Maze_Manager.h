@@ -34,11 +34,15 @@ public:
 
 	bool in_deadlock();
 
+	bool in_partial_deadlock();
+
 	void take_turn();
 
 	bool check_move(int index);
 
 	void read_maze(string file_name);
+
+	void validate_maze();
 
 };
 

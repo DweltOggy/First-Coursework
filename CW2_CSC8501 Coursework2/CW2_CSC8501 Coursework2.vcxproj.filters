@@ -24,12 +24,18 @@
     <ClCompile Include="Maze_Manager.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="Menu_Functions.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Maze.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="Maze_Manager.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Menu_Functions.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

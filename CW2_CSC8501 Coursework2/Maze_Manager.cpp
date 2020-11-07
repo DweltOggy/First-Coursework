@@ -67,6 +67,21 @@ bool Maze_Manager::in_deadlock()
 }
 
 
+bool Maze_Manager::in_partial_deadlock()
+{
+	bool answer = false;
+	int deadlock_count = 0;
+
+	for (int i = 0; i < the_players.size(); i++)
+		if (the_players[i].deadlocked == false)
+			deadlock_count++;
+
+	if (deadlock_count < the_players.size() && deadlock_count > 0)
+		answer = true;
+
+	return answer;
+}
+
 void Maze_Manager::take_turn()
 {
 	for (int i = 0; i < the_players.size(); i++)
@@ -104,8 +119,7 @@ bool Maze_Manager::check_move(int index)
 					the_players[index].deadlocked = true;
 					the_players[i].deadlocked = true;
 					return false;
-				}
-					
+				}			
 		}
 	}
 	return true;
@@ -166,8 +180,6 @@ void Maze_Manager::read_maze(string file_name)
 					the_players.push_back(temp_player);
 				}
 			}
-
-
 			(*the_maze).push_back(temp_row);
 			m_height++;
 		}
