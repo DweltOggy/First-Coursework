@@ -53,6 +53,11 @@ struct cell
 	double h = 0;
 
 	cell* from = nullptr;
+
+	~cell()
+	{
+		neighbors.clear();
+	}
 };
 
 class Maze
@@ -89,8 +94,6 @@ public:
 	vector<coord> calculate_path(coord begin, coord target);
 	void delete_maze();
 	void link_nodes();
-
-	//coord find_point(char value);
 
 	void save_maze(string file_name);
 	void read_maze(string file_name);

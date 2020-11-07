@@ -21,7 +21,7 @@ int main()
 		cout << "3. Run maze anlysis on 100 mazes" << endl;
 		cout << "4. Quit " << endl;
 		cin >> menu_choice;
-		cout <<  endl << endl;
+		cout << endl;
 
 		switch (menu_choice)
 		{

@@ -8,6 +8,11 @@ struct Player
 	bool finished = false;
 	bool deadlocked = false;
 	int index = 0;
+
+	~Player()
+	{
+		path.clear();
+	}
 };
 
 class Maze_Manager: public Maze
@@ -15,7 +20,8 @@ class Maze_Manager: public Maze
 private:
 	vector<Player> the_players;
 
-	bool solvable = true;
+	bool m_solvable = true;
+	bool m_valid = true;
 
 	int m_num_mazes;
 

@@ -47,6 +47,8 @@ void run_from_loaded()
 	
 	if(the_game->the_maze != nullptr)
 		run_maze(the_game);
+
+	delete the_game;
 }
 
 void run_maze(Maze_Manager* the_game)
