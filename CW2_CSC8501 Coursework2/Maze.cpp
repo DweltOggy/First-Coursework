@@ -10,7 +10,7 @@
 #include "Maze.h"
 
 
-double manhattanDistance(coord a, coord b)
+double inline manhattanDistance(coord a, coord b)
 {
 	return sqrt((a.x - b.x) * (a.x - b.x) + (a.y - b.y) * (a.y - b.y));
 }
