@@ -1,16 +1,12 @@
 #include <fstream>
 #include <string>
-#include <time.h>
-#include <Windows.h>
 #include <vector>
-#include <algorithm>
-#include <cstdlib>
 #include <iostream>
 
 #include "Maze.h"
 
 
-double inline manhattanDistance(coord a, coord b)
+inline double manhattanDistance(coord a, coord b)
 {
 	return sqrt((a.x - b.x) * (a.x - b.x) + (a.y - b.y) * (a.y - b.y));
 }
@@ -115,7 +111,7 @@ void Maze::link_nodes()
 		}
 }
 
-vector<coord> Maze::calculate_path(coord begin, coord target)
+inline vector<coord> Maze::calculate_path(coord begin, coord target)
 {
 	vector<coord> thePath;
 
@@ -152,21 +148,18 @@ vector<coord> Maze::calculate_path(coord begin, coord target)
 		cell* current = lowest_F();
 
 		if (current->pos == end->pos)
-		{
 			return reconstruct_path(current);
-		}
+		
 
 		current->openset = false;
 		current->closedset = true;
 
 		for (int i = 0; i < open.size(); i++)
-		{
 			if (open[i] == current)
-			{
 				open.erase(open.begin() + i);
-			}
 			
-		}
+			
+		
 
 		closed.push_back(current);
 
@@ -180,10 +173,7 @@ vector<coord> Maze::calculate_path(coord begin, coord target)
 
 			float f_score = g_score + h_score;
 
-			if(neighbors[i]->closedset)
-			{
-			}
-			else
+			if(neighbors[i]->closedset == false)
 			{
 				if ( g_score < neighbors[i]->g_score || neighbors[i]->openset == false)
 				{
@@ -203,7 +193,7 @@ vector<coord> Maze::calculate_path(coord begin, coord target)
 	return thePath;
 }
 
-vector<coord> Maze::reconstruct_path(cell* current)
+inline vector<coord> Maze::reconstruct_path(cell* current)
 {
 	std::vector<coord> returnPath;
 	returnPath.push_back(current->pos);
@@ -212,12 +202,11 @@ vector<coord> Maze::reconstruct_path(cell* current)
 	{
 		loopPtr = loopPtr->from;
 		returnPath.push_back(loopPtr->pos);
-		//returnPath.push_back(loopPtr->from);
 	}
 	return returnPath;
 }
 
-cell* Maze::lowest_F()
+inline cell* Maze::lowest_F()
 {
 	cell* lowestF = traversable_cells[0];
 	float currentLowest = 10000000;
@@ -249,7 +238,6 @@ void Maze::solve_maze(coord start)
 
 void Maze::generate_maze(int height, int length, int exits)
 {
-	//initilise(height, length, exits);
 	place_exits();
 
 	for (int i = 1; i < m_height - 1; i++)
@@ -347,34 +335,8 @@ void Maze::print_maze()
 		for (int i = 0; i < m_height; i++)
 		{
 			for (int j = 0; j < m_length; j++)
-			{
-				if ((*the_maze)[i][j].value == 'E')
-				{
-					SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), 10);
-					cout << (*the_maze)[i][j].value;
-					SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), 7);
-				}
-				else if ((*the_maze)[i][j].value == 'F')
-				{
-					SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), 12);
-					cout << (*the_maze)[i][j].value;
-					SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), 7);
-				}
-				else if ((*the_maze)[i][j].value == 'o')
-				{
-					SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), 6);
-					cout << (*the_maze)[i][j].value;
-					SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), 7);
-				}
-				else if ((*the_maze)[i][j].value == 'P')
-				{
-					SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), 11);
-					cout << (*the_maze)[i][j].value;
-					SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), 7);
-				}
-				else
-					cout << (*the_maze)[i][j].value;
-			}	
+				cout << (*the_maze)[i][j].value;
+				
 			cout << endl;
 		}
 	}

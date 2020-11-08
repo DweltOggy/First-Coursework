@@ -67,8 +67,8 @@ private:
 	vector<cell*> traversable_cells;
 
 	void place_exits();
-	vector<coord> reconstruct_path(cell* current);
-	cell* lowest_F();
+	inline vector<coord> reconstruct_path(cell* current);
+	inline cell* lowest_F();
 	void draw_path(vector<coord> path);
 
 public:
@@ -91,7 +91,7 @@ public:
 
 	void set_maze_coord(coord position, char value);
 	
-	vector<coord> calculate_path(coord begin, coord target);
+	inline vector<coord> calculate_path(coord begin, coord target);
 	void delete_maze();
 	void link_nodes();
 
