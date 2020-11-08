@@ -32,22 +32,18 @@ void Maze_Manager::initilise(int height, int length, int exits)
 
 void Maze_Manager::generate_player_paths()
 {
-	if(the_maze)
-		for (int i = 0; i < the_players.size(); i++)
-		{
-			the_players[i].path = calculate_path(the_players[i].position,m_center);
-			the_players[i].path.pop_back();
-			the_players[i].position = the_players[i].path.back();	
-		}
+	
+	for (int i = 0; i < the_players.size(); i++)
+	{
+		the_players[i].path = calculate_path(the_players[i].position,m_center);
+		the_players[i].path.pop_back();
+		the_players[i].position = the_players[i].path.back();	
+	}
 }
 
 void Maze_Manager::analyze_paths()
 {
-	if (the_maze)
-	{
-
-
-	}
+	
 }
 
 bool Maze_Manager::all_players_done()
@@ -92,23 +88,20 @@ bool Maze_Manager::in_partial_deadlock()
 
 void Maze_Manager::take_turn()
 {
-	if (the_maze)
+	
+	for (int i = 0; i < the_players.size(); i++)
 	{
-		for (int i = 0; i < the_players.size(); i++)
+		if (the_players[i].finished == false)
 		{
-			if (the_players[i].finished == false)
+			if(check_move(the_players[i].index))
 			{
-				if(check_move(the_players[i].index))
-				{
-					set_maze_coord(the_players[i].position, 'o');
-
-					the_players[i].position = the_players[i].path.back();
-					the_players[i].path.pop_back();
-					set_maze_coord(the_players[i].position, 'P');
+				set_maze_coord(the_players[i].position, 'o');
+				the_players[i].position = the_players[i].path.back();
+				the_players[i].path.pop_back();
+				set_maze_coord(the_players[i].position, 'P');
 				
-					if (the_players[i].position == m_center)
-						the_players[i].finished = true;
-				}
+				if (the_players[i].position == m_center)
+					the_players[i].finished = true;
 			}
 		}
 	}
@@ -117,28 +110,24 @@ void Maze_Manager::take_turn()
 
 bool Maze_Manager::check_move(int index)
 {
-	if (the_maze)
+	for (int i = 0; i < the_players.size(); i++)
 	{
-		for (int i = 0; i < the_players.size(); i++)
+		if (the_players[i].index != index && the_players[i].finished == false)
 		{
-			if (the_players[i].index != index && the_players[i].finished == false)
-			{
-				if (the_players[index].path.size() > 0)
-					if (the_players[index].path.back() == the_players[i].position)
-						return false;
-				if(the_players[index].path.size() > 0 && the_players[i].path.size() > 0)
-					if (the_players[index].path.back() == the_players[i].path.back())
-					{
-						the_players[index].deadlocked = true;
-						the_players[i].deadlocked = true;
+			if (the_players[index].path.size() > 0)
+				if (the_players[index].path.back() == the_players[i].position)
+					return false;
+			if(the_players[index].path.size() > 0 && the_players[i].path.size() > 0)
+				if (the_players[index].path.back() == the_players[i].path.back())
+				{
+					the_players[index].deadlocked = true;
+					the_players[i].deadlocked = true;
 
-						the_players[index].finished = true;
-						the_players[i].finished = true;
-						return false;
-					}			
-			}
+					the_players[index].finished = true;
+					the_players[i].finished = true;
+					return false;
+				}			
 		}
-
 	}
 	
 	return true;
@@ -212,29 +201,20 @@ void Maze_Manager::read_maze(string file_name)
 
 bool Maze_Manager::validate_maze()
 {
-	if (the_maze)
-	{
-		if (the_players.size() < m_entrances || the_players.size() > m_entrances || the_players.size() < 2)
-			return false;
-	}
+	if (the_players.size() < m_entrances || the_players.size() > m_entrances || the_players.size() < 2)
+		return false;
+	
 	return true;
 }
 
 bool  Maze_Manager::run_maze()
 {
-	if (the_maze)
-	{
 		while (all_players_done() == false)
 			take_turn();
 	
-
 		for (auto i = 0; i < the_players.size(); i++)
 			if (the_players[i].deadlocked == true)
 				return false;
-
-	}
-
-	
 
 	return true;
 }

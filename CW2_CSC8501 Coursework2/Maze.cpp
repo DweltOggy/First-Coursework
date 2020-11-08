@@ -330,17 +330,13 @@ void Maze::place_exits()
 
 void Maze::print_maze()
 {
-	if (the_maze)
+	for (int i = 0; i < m_height; i++)
 	{
-		for (int i = 0; i < m_height; i++)
-		{
-			for (int j = 0; j < m_length; j++)
-				cout << (*the_maze)[i][j].value;
+		for (int j = 0; j < m_length; j++)
+			cout << (*the_maze)[i][j].value;
 				
-			cout << endl;
-		}
+		cout << endl;
 	}
-
 }
 
 void Maze::save_maze(string file_name)
