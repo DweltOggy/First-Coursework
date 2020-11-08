@@ -227,6 +227,8 @@ void run_maze(Maze_Manager* the_game)
 		if (the_game->in_deadlock())
 			cout << "Maze is in deadlock! You should quit!" << endl;
 		
+		if (the_game->in_partial_deadlock())
+			cout << "Maze is in partial deadlock!" << endl;
 
 		char save_maze = 'n';
 
