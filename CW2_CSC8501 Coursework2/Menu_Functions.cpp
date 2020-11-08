@@ -8,9 +8,11 @@ void opening_Menu()
 {
 	bool maze_coninue = true;
 
+	
 	while (maze_coninue)
 	{
 		draw_Menu();
+
 		int menu_choice = 0;
 		cin >> menu_choice;
 		switch (menu_choice)
@@ -18,29 +20,30 @@ void opening_Menu()
 		case 1:
 			run_single_player();
 			menu_choice = 0;
-			break;
+				break;
 		case 2:
 			run_one_maze();
 			menu_choice = 0;
-			break;
+				break;
 		case 3:
 			run_from_loaded();
 			menu_choice = 0;
-			break;
+				break;
 		case 4:
 			run_maze_analysis();
 			menu_choice = 0;
-			break;
+				break;
 		case 5:
 			maze_coninue = false;
 			menu_choice = 0;
-			break;
+				break;
 
 		default:
 			cout << "selected a valid option!" << endl;
 			menu_choice = 0;
-			break;
+				break;
 		}
+		menu_choice = 0;
 	}
 }
 
@@ -50,7 +53,7 @@ inline void draw_Menu()
 	cout << "*                                                *" << endl;
 	cout << "*       Welcome to the maze generator!           *" << endl;
 	cout << "*                                                *" << endl;
-	cout << "*   1. Generate and run a maze                   *" << endl;
+	cout << "*   1. Generate or load a maze (coursework 1)    *" << endl;
 	cout << "*   2. Generate and run a cooprative solve maze  *" << endl;
 	cout << "*   3. Load a multiple player maze               *" << endl;
 	cout << "*   4. Run maze anlysis on 100 mazes             *" << endl;
@@ -294,6 +297,6 @@ void run_maze_analysis()
 	
 	cout << " Thats a win ratio of :" << wins / 100 << "!" << endl;
 	cout << "Partial Deadlocks:" << partial_deadlocks << endl;
-	cout << "That means " << (partial_deadlocks/losses)*100 << "% of losses were partial deadlocks"<< endl;
+	cout << "That means " << (partial_deadlocks/losses)*100 << "% of losses were partially solvable"<< endl;
 	delete test_maze;
 }

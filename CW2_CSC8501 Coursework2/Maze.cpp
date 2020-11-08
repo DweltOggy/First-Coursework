@@ -149,7 +149,6 @@ inline vector<coord> Maze::calculate_path(coord begin, coord target)
 
 		if (current->pos == end->pos)
 			return reconstruct_path(current);
-		
 
 		current->openset = false;
 		current->closedset = true;
@@ -157,34 +156,31 @@ inline vector<coord> Maze::calculate_path(coord begin, coord target)
 		for (int i = 0; i < open.size(); i++)
 			if (open[i] == current)
 				open.erase(open.begin() + i);
-			
-			
 		
-
 		closed.push_back(current);
 
-		vector<cell*> neighbors = current->neighbors;
+		vector<cell*> *neighbors = &current->neighbors;
 
-		for (int i = 0; i < neighbors.size(); i++)
+		for (int i = 0; i < neighbors->size(); i++)
 		{
 			float g_score = current->g_score + 1;
 
-			float h_score = manhattanDistance(neighbors[i]->pos, end->pos);
+			float h_score = manhattanDistance((*neighbors)[i]->pos, end->pos);
 
 			float f_score = g_score + h_score;
 
-			if(neighbors[i]->closedset == false)
+			if((*neighbors)[i]->closedset == false)
 			{
-				if ( g_score < neighbors[i]->g_score || neighbors[i]->openset == false)
+				if ( g_score < (*neighbors)[i]->g_score || (*neighbors)[i]->openset == false)
 				{
-					neighbors[i]->from = current;
-					neighbors[i]->g_score = g_score;
-					neighbors[i]->f_score = f_score;
-					neighbors[i]->h = h_score;
-					if (neighbors[i]->openset == false)
+					(*neighbors)[i]->from = current;
+					(*neighbors)[i]->g_score = g_score;
+					(*neighbors)[i]->f_score = f_score;
+					(*neighbors)[i]->h = h_score;
+					if ((*neighbors)[i]->openset == false)
 					{
-						neighbors[i]->openset = true;
-						open.push_back(neighbors[i]);
+						(*neighbors)[i]->openset = true;
+						open.push_back((*neighbors)[i]);
 					}
 				}
 			}		
@@ -237,6 +233,8 @@ void Maze::solve_maze()
 
 	for (int i = 0; i < m_entrances; i++)
 		(*the_maze)[entrances_coords[i].y][entrances_coords[i].x].value = 'E';
+
+	(*the_maze)[m_center.y][m_center.x].value = 'S';
 }
 
 void Maze::generate_maze(int height, int length, int exits)
