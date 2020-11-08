@@ -34,8 +34,6 @@ public:
 	
 	void generate_player_paths();
 
-	void analyze_paths();
-
 	bool all_players_done();
 
 	bool in_deadlock();

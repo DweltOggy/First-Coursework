@@ -35,20 +35,16 @@ void Maze_Manager::generate_player_paths()
 {
 	for (int i = 0; i < the_players.size(); i++)
 	{
-		if (the_players[i].path.empty())
-		{
-			throw emptyPathException();
-		}
 		the_players[i].path = calculate_path(the_players[i].position,m_center);
+
+		if (the_players[i].path.empty())
+			throw emptyPathException();
+
 		the_players[i].path.pop_back();
 		the_players[i].position = the_players[i].path.back();	
 	}
 }
 
-void Maze_Manager::analyze_paths()
-{
-	
-}
 
 bool Maze_Manager::all_players_done()
 {
