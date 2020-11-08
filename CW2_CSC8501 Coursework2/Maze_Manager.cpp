@@ -2,6 +2,7 @@
 #include <iostream>
 
 #include "Maze_Manager.h"
+#include "Maze.h"
 
 
 Maze_Manager::Maze_Manager()

@@ -86,7 +86,7 @@ public:
 	~Maze();
 
 	void generate_maze(int height, int length, int exits);
-	void solve_maze(coord start);
+	void solve_maze();
 	void print_maze();
 
 	void set_maze_coord(coord position, char value);

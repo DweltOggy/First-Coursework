@@ -16,31 +16,37 @@ int main()
 	{
 		int menu_choice = 0;
 		
-		cout << "1. Generate and run a maze with multiple players" << endl;
-		cout << "2. Load a multiple player maze" << endl;
-		cout << "3. Run maze anlysis on 100 mazes" << endl;
-		cout << "4. Quit " << endl;
+		cout << "1. Generate and run a maze " << endl;
+		cout << "2. Generate and run a cooprative solve maze" << endl;
+		cout << "3. Load a multiple player maze" << endl;
+		cout << "4. Run maze anlysis on 100 mazes" << endl;
+		cout << "5. Quit " << endl;
 		cin >> menu_choice;
 		cout << endl;
 
 		switch (menu_choice)
 		{
 		case 1:
-			run_one_maze();
+			run_single_player();
 			menu_choice = 0;
 			break;
 		case 2:
-			run_from_loaded();
+			run_one_maze();
 			menu_choice = 0;
 			break;
 		case 3:
-			run_maze_analysis();
+			run_from_loaded();
 			menu_choice = 0;
 			break;
 		case 4:
+			run_maze_analysis();
+			menu_choice = 0;
+			break;
+		case 5:
 			maze_coninue = false;
 			menu_choice = 0;
 			break;
+
 		default:
 			cout << "selected a valid option!" << endl;
 			menu_choice = 0;

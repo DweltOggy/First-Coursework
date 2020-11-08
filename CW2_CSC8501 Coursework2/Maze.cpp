@@ -230,10 +230,10 @@ void Maze::draw_path(vector<coord> path)
 		(*the_maze)[path[i].y][path[i].x].value = 'o';
 }
 
-void Maze::solve_maze(coord start)
+void Maze::solve_maze()
 {
 	for(auto i = 0; i < entrances_coords.size();i++)
-		draw_path(calculate_path(start, entrances_coords[i]));
+		draw_path(calculate_path(m_center, entrances_coords[i]));
 }
 
 void Maze::generate_maze(int height, int length, int exits)

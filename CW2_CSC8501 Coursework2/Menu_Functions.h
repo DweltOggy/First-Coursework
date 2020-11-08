@@ -3,6 +3,8 @@
 #include "Maze.h"
 #include "Maze_Manager.h"
 
+void run_single_player();
+
 void run_one_maze();
 
 void run_from_loaded();

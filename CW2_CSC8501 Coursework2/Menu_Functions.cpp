@@ -4,6 +4,96 @@
 #include <iostream>
 #include <time.h>
 
+void run_single_player()
+{
+	Maze* game_maze = new Maze;
+
+	int maze_lenght = 0;
+	int maze_height = 0;
+	int exit_number = 0;
+
+	bool generate = true;
+
+	char answer1 = 'N';
+	cout << " Load Maze? Y/N" << endl;
+	cin >> answer1;
+
+	switch (answer1)
+	{
+	case 'N':
+		generate = true;
+			break;
+	case 'n':
+		generate = true;
+			break;
+	case 'Y':
+		generate = false;
+			break;
+	case 'y':
+		generate = false;
+		break;
+	default:
+		generate = true;
+		break;
+	}
+
+
+	if (generate)
+	{
+		while (maze_lenght < 20 || maze_lenght > 70)
+		{
+			cout << " please enter the lenght of the maze between 20 and 70" << endl;
+			cin >> maze_lenght;
+		}
+		while (maze_height < 20 || maze_height > 70)
+		{
+			cout << " please enter the height of the maze between 20 and 70" << endl;
+			cin >> maze_height;
+		}
+		while (exit_number < 1 || exit_number > 10)
+		{
+			cout << " please enter the exits of the maze between 1 and 10" << endl;
+			cin >> exit_number;
+		}
+		game_maze->initilise(maze_height, maze_lenght, exit_number);
+		game_maze->solve_maze();
+	}
+	else
+	{
+		string file_name;
+		cout << " please enter the name of the file you wish to load (without .txt)" << endl;
+		cin >> file_name;
+		game_maze->read_maze(file_name);
+
+	}
+		
+	game_maze->print_maze();
+	char save_maze = 'n';
+
+	cout << " Save Maze? Y/N" << endl;
+	cin >> save_maze;
+	string file_name;
+	switch (save_maze)
+	{
+	case 'Y':
+		cout << "Please enter a file name (without .txt)" << endl;
+		cin >> file_name;
+		game_maze->save_maze(file_name);
+		break;
+	case 'y':
+		cout << "Please enter a file name (without .txt)" << endl;
+		cin >> file_name;
+		game_maze->save_maze(file_name);
+		break;
+	default:
+
+		break;
+	}
+
+	delete game_maze;
+	
+}
+
 void run_one_maze()
 {
 	Maze_Manager* the_game = new Maze_Manager;
@@ -11,14 +101,14 @@ void run_one_maze()
 	int maze_height = 0;
 	int exit_number = 0;
 	
-	while (maze_lenght < 25 || maze_lenght > 50)
+	while (maze_lenght < 15 || maze_lenght > 35)
 	{
-		cout << " please enter the lengtn of the maze between 25 and 50" << endl;
+		cout << " please enter the lengtn of the maze between 15 and 35" << endl;
 		cin >> maze_lenght;
 	}
-	while (maze_height < 25 || maze_height > 50)
+	while (maze_height < 15 || maze_height > 35)
 	{
-		cout << " please enter the height of the maze between 25 and 50" << endl;
+		cout << " please enter the height of the maze between 15 and 35" << endl;
 		cin >> maze_height;
 	}
 	while (exit_number < 2 || exit_number > 8)
@@ -115,19 +205,19 @@ void run_maze_analysis()
 	int test_height = 0;
 	int test_number = 0;
 
-	while (test_lenght < 20 || test_lenght > 40)
+	while (test_lenght < 15 || test_lenght > 35)
 	{
-		cout << " please enter the lengtn of the mazes to be run between 20 and 40" << endl;
+		cout << " please enter the lengtn of the mazes to be run between 15 and 35" << endl;
 		cin >> test_lenght;
 	}
-	while (test_height < 20 || test_height > 40)
+	while (test_height < 15 || test_height > 35)
 	{
-		cout << " please enter the height of the mazes to be run between 20 and 40" << endl;
+		cout << " please enter the height of the mazes to be run between 15 and 35" << endl;
 		cin >> test_height;
 	}
-	while (test_number < 2 || test_number > 6)
+	while (test_number < 2 || test_number > 8)
 	{
-		cout << " please enter the number of player for the mazes to be run between 2 and 6" << endl;
+		cout << " please enter the number of player for the mazes to be run between 2 and 8" << endl;
 		cin >> test_number;
 	}
 	Maze_Manager* test_maze = new Maze_Manager;
