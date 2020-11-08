@@ -3,6 +3,10 @@
 #include "Maze.h"
 #include "Maze_Manager.h"
 
+void opening_Menu();
+
+inline void draw_Menu();
+
 void run_single_player();
 
 void run_one_maze();

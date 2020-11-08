@@ -33,7 +33,6 @@ void Maze_Manager::initilise(int height, int length, int exits)
 
 void Maze_Manager::generate_player_paths()
 {
-	
 	for (int i = 0; i < the_players.size(); i++)
 	{
 		the_players[i].path = calculate_path(the_players[i].position,m_center);
@@ -202,8 +201,13 @@ void Maze_Manager::read_maze(string file_name)
 
 bool Maze_Manager::validate_maze()
 {
-	if (the_players.size() < m_entrances || the_players.size() > m_entrances || the_players.size() < 2)
+	if (the_players.size() < m_entrances || the_players.size() > m_entrances || the_players.size() < 2
+		|| the_maze == nullptr)
+	{
+		cout << "Invalid Maze" << endl;
 		return false;
+	}
+		
 	
 	return true;
 }

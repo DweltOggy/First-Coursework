@@ -4,6 +4,61 @@
 #include <iostream>
 #include <time.h>
 
+void opening_Menu()
+{
+	bool maze_coninue = true;
+
+	while (maze_coninue)
+	{
+		draw_Menu();
+		int menu_choice = 0;
+		cin >> menu_choice;
+		switch (menu_choice)
+		{
+		case 1:
+			run_single_player();
+			menu_choice = 0;
+			break;
+		case 2:
+			run_one_maze();
+			menu_choice = 0;
+			break;
+		case 3:
+			run_from_loaded();
+			menu_choice = 0;
+			break;
+		case 4:
+			run_maze_analysis();
+			menu_choice = 0;
+			break;
+		case 5:
+			maze_coninue = false;
+			menu_choice = 0;
+			break;
+
+		default:
+			cout << "selected a valid option!" << endl;
+			menu_choice = 0;
+			break;
+		}
+	}
+}
+
+inline void draw_Menu()
+{
+	cout << "**************************************************" << endl;
+	cout << "*                                                *" << endl;
+	cout << "*       Welcome to the maze generator!           *" << endl;
+	cout << "*                                                *" << endl;
+	cout << "*   1. Generate and run a maze                   *" << endl;
+	cout << "*   2. Generate and run a cooprative solve maze  *" << endl;
+	cout << "*   3. Load a multiple player maze               *" << endl;
+	cout << "*   4. Run maze anlysis on 100 mazes             *" << endl;
+	cout << "*   5. Quit                                      *" << endl;
+	cout << "*                                                *" << endl;
+	cout << "**************************************************" << endl;
+}
+
 void run_single_player()
 {
 	Maze* game_maze = new Maze;
@@ -20,34 +75,28 @@ void run_single_player()
 
 	switch (answer1)
 	{
-	case 'N':
-		generate = true;
-			break;
-	case 'n':
-		generate = true;
-			break;
 	case 'Y':
 		generate = false;
 			break;
 	case 'y':
 		generate = false;
-		break;
+			break;
 	default:
 		generate = true;
-		break;
+			break;
 	}
 
 
 	if (generate)
 	{
-		while (maze_lenght < 20 || maze_lenght > 70)
+		while (maze_lenght < 15 || maze_lenght > 35)
 		{
-			cout << " please enter the lenght of the maze between 20 and 70" << endl;
+			cout << " please enter the lenght of the maze between 15 and 35" << endl;
 			cin >> maze_lenght;
 		}
-		while (maze_height < 20 || maze_height > 70)
+		while (maze_height < 15 || maze_height > 35)
 		{
-			cout << " please enter the height of the maze between 20 and 70" << endl;
+			cout << " please enter the height of the maze between 15 and 35" << endl;
 			cin >> maze_height;
 		}
 		while (exit_number < 1 || exit_number > 10)
@@ -79,12 +128,12 @@ void run_single_player()
 		cout << "Please enter a file name (without .txt)" << endl;
 		cin >> file_name;
 		game_maze->save_maze(file_name);
-		break;
+			break;
 	case 'y':
 		cout << "Please enter a file name (without .txt)" << endl;
 		cin >> file_name;
 		game_maze->save_maze(file_name);
-		break;
+			break;
 	default:
 
 		break;
@@ -135,7 +184,7 @@ void run_from_loaded()
 	the_game->read_maze(file_name);
 	the_game->generate_player_paths();
 	
-	if(the_game->the_maze != nullptr)
+	if(the_game->validate_maze())
 		run_maze(the_game);
 
 	delete the_game;
@@ -167,12 +216,12 @@ void run_maze(Maze_Manager* the_game)
 			cout << "Please enter a file name (without .txt)" << endl;
 			cin >> file_name;
 			the_game->save_maze(file_name);
-			break;
+				break;
 		case 'y':
 			cout << "Please enter a file name (without .txt)" << endl;
 			cin >> file_name;
 			the_game->save_maze(file_name);
-			break;
+				break;
 		default:
 
 			break;
@@ -187,10 +236,10 @@ void run_maze(Maze_Manager* the_game)
 		{
 		case 'Y':
 			is_done = true;
-			break;
+				break;
 		case 'y':
 			is_done = true;
-			break;
+				break;
 		default:
 
 			break;
