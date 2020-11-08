@@ -250,6 +250,7 @@ void run_maze(Maze_Manager* the_game)
 void run_maze_analysis()
 {
 	double wins = 0;
+	double losses = 0;
 	double partial_deadlocks = 0;
 	int test_lenght = 0;
 	int test_height = 0;
@@ -279,8 +280,13 @@ void run_maze_analysis()
 		test_maze->generate_player_paths();
 		if (test_maze->run_maze())
 			++wins;
-		if(test_maze->in_partial_deadlock())
-			++partial_deadlocks;
+		else
+		{
+			++losses;
+			if(test_maze->in_partial_deadlock())
+				++partial_deadlocks;
+		}
+
 		cout << "#";
 	}
 	cout << endl;
@@ -288,8 +294,6 @@ void run_maze_analysis()
 	
 	cout << " Thats a win ratio of :" << wins / 100 << "!" << endl;
 	cout << "Partial Deadlocks:" << partial_deadlocks << endl;
-	cout << "That means " << (partial_deadlocks/100 - wins)*100 << "% of losses were partial deadlocks"<< endl;
-
+	cout << "That means " << (partial_deadlocks/losses)*100 << "% of losses were partial deadlocks"<< endl;
 	delete test_maze;
-	cout << wins << endl;
 }

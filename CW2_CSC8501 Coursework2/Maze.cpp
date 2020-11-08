@@ -234,6 +234,9 @@ void Maze::solve_maze()
 {
 	for(auto i = 0; i < entrances_coords.size();i++)
 		draw_path(calculate_path(m_center, entrances_coords[i]));
+
+	for (int i = 0; i < m_entrances; i++)
+		(*the_maze)[entrances_coords[i].y][entrances_coords[i].x].value = 'E';
 }
 
 void Maze::generate_maze(int height, int length, int exits)
@@ -244,7 +247,7 @@ void Maze::generate_maze(int height, int length, int exits)
 		for (int j = 1; j < m_length - 1; j++)
 		{
 			int random = rand() % 10;
-			if (random < 7)
+			if (random < 8)
 				(*the_maze)[i][j].value = ' ';
 		}
 
