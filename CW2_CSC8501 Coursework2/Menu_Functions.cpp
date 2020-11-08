@@ -249,7 +249,8 @@ void run_maze(Maze_Manager* the_game)
 
 void run_maze_analysis()
 {
-	int wins = 0;
+	double wins = 0;
+	double partial_deadlocks = 0;
 	int test_lenght = 0;
 	int test_height = 0;
 	int test_number = 0;
@@ -264,9 +265,9 @@ void run_maze_analysis()
 		cout << " please enter the height of the mazes to be run between 15 and 35" << endl;
 		cin >> test_height;
 	}
-	while (test_number < 2 || test_number > 8)
+	while (test_number < 2 || test_number > 6)
 	{
-		cout << " please enter the number of player for the mazes to be run between 2 and 8" << endl;
+		cout << " please enter the number of player for the mazes to be run between 2 and 6" << endl;
 		cin >> test_number;
 	}
 	Maze_Manager* test_maze = new Maze_Manager;
@@ -277,12 +278,17 @@ void run_maze_analysis()
 		test_maze->initilise(test_height, test_lenght, test_number);
 		test_maze->generate_player_paths();
 		if (test_maze->run_maze())
-			wins++;
+			++wins;
+		if(test_maze->in_partial_deadlock())
+			++partial_deadlocks;
 		cout << "#";
 	}
 	cout << endl;
-	cout << "Randomly generated mazes in this coniguration were solved without full deadlock :" << wins << " times!"<< endl;
-	cout << " Thats a win ratio of :" << (double)wins / 100 << "!" << endl;
+	cout << "Randomly generated mazes in this coniguration were solved without full or partial deadlock :" << wins << " times!"<< endl;
+	
+	cout << " Thats a win ratio of :" << wins / 100 << "!" << endl;
+	cout << "Partial Deadlocks:" << partial_deadlocks << endl;
+	cout << "That means " << (partial_deadlocks/100 - wins)*100 << "% of losses were partial deadlocks"<< endl;
 
 	delete test_maze;
 	cout << wins << endl;

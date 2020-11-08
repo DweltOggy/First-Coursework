@@ -208,7 +208,6 @@ bool Maze_Manager::validate_maze()
 		return false;
 	}
 		
-	
 	return true;
 }
 
