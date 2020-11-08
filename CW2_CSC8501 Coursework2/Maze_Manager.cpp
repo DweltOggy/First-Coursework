@@ -35,6 +35,10 @@ void Maze_Manager::generate_player_paths()
 {
 	for (int i = 0; i < the_players.size(); i++)
 	{
+		if (the_players[i].path.empty())
+		{
+			throw emptyPathException();
+		}
 		the_players[i].path = calculate_path(the_players[i].position,m_center);
 		the_players[i].path.pop_back();
 		the_players[i].position = the_players[i].path.back();	
@@ -118,15 +122,16 @@ bool Maze_Manager::check_move(int index)
 				if (the_players[index].path.back() == the_players[i].position)
 					return false;
 			if(the_players[index].path.size() > 0 && the_players[i].path.size() > 0)
-				if (the_players[index].path.back() == the_players[i].path.back())
-				{
-					the_players[index].deadlocked = true;
-					the_players[i].deadlocked = true;
+				if(the_players[index].path.back() != m_center)
+					if (the_players[index].path.back() == the_players[i].path.back())
+					{
+						the_players[index].deadlocked = true;
+						the_players[i].deadlocked = true;
 
-					the_players[index].finished = true;
-					the_players[i].finished = true;
-					return false;
-				}			
+						the_players[index].finished = true;
+						the_players[i].finished = true;
+						return false;
+					}			
 		}
 	}
 	
@@ -170,6 +175,7 @@ void Maze_Manager::read_maze(string file_name)
 					temp_exit.y = m_height;
 					temp_exit.x = i;
 					entrances_coords.push_back(temp_exit);
+					m_entrances = entrances_coords.size();
 				}
 				if (temp.value == 'F')
 				{
@@ -193,7 +199,6 @@ void Maze_Manager::read_maze(string file_name)
 		}
 		myfile.close();
 		link_nodes();
-		m_valid = validate_maze();
 	}
 	else
 		cout << "couldn't open file: " << file_name << ".txt" << endl;
@@ -201,12 +206,14 @@ void Maze_Manager::read_maze(string file_name)
 
 bool Maze_Manager::validate_maze()
 {
-	if (the_players.size() < m_entrances || the_players.size() > m_entrances || the_players.size() < 2
+	if (the_players.size() != m_entrances || the_players.size() < 2
 		|| the_maze == nullptr)
 	{
 		cout << "Invalid Maze" << endl;
 		return false;
 	}
+
+	
 		
 	return true;
 }

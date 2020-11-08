@@ -1,9 +1,17 @@
 #pragma once
 #include <vector>
 #include <string>
+#include <exception>
 
 using namespace std;
 
+struct emptyPathException : public exception
+{
+	const char* what() const throw () 
+	{
+		return "Path was empty";
+	}
+};
 struct coord
 {
 	int x = 0;

@@ -4,6 +4,8 @@
 #include <iostream>
 #include <time.h>
 
+using namespace std;
+
 void opening_Menu()
 {
 	bool maze_coninue = true;
@@ -172,7 +174,15 @@ void run_one_maze()
 	the_game->initilise(maze_height, maze_lenght, exit_number);
 	the_game->generate_player_paths();
 
-	run_maze(the_game);
+	try
+	{
+		run_maze(the_game);
+	}
+	catch (const exception& error)
+	{
+		cout << " Couldn't run that Maze: something went wrong with Path finding. Try again." << endl;
+	}
+	
 
 	delete the_game;
 }
@@ -185,10 +195,20 @@ void run_from_loaded()
 	cin >> file_name;
 
 	the_game->read_maze(file_name);
-	the_game->generate_player_paths();
-	
-	if(the_game->validate_maze())
-		run_maze(the_game);
+
+	try 
+	{
+		if (the_game->validate_maze())
+		{
+			the_game->generate_player_paths();
+			run_maze(the_game);
+		}
+	}
+	catch (const exception& error)
+	{
+		cout << " Couldn't run that Maze: Probably unsolvable" << endl;
+	}
+
 
 	delete the_game;
 }
